@@ -1,6 +1,6 @@
 <?php
+session_start();
 include "includes/class.file.php";
-
 $link = new File();
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,6 @@ $link = new File();
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.0/css/swiper.min.css">
 
 	<link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 	<style>
       .blinkBtn a {
         font-weight: 500;
@@ -38,17 +37,6 @@ $link = new File();
         -moz-animation: glowing 1300ms infinite;
         animation: glowing 1300ms infinite;
       }
-	  .blinkBtn a:hover {
-    -webkit-animation: glowing 1300ms infinite;
-    -moz-animation: glowing 1300ms infinite;
-    animation: glowing 1300ms infinite;
-}
-.blinkBtn a:active {
-    -webkit-animation: glowing 1300ms infinite;
-    -moz-animation: glowing 1300ms infinite;
-    animation: glowing 1300ms infinite;
-}
-
       @-webkit-keyframes glowing {
         0% {
           background-color: #2ba805;
@@ -135,6 +123,7 @@ $link = new File();
 							  	</div>
 					   		</div>
 					   	</form>
+						
 						   <div style="display: flex; align-items: left;">
                              <div style="flex: 6;">
                                  <a href="admission-form.php" style="font-weight: 700;
@@ -154,7 +143,7 @@ $link = new File();
 							
 
 							<div style="flex: 3; align-item: right;">
-                              <a href="student-profile.php" style="font-weight: 700;
+                              <a href="profile.php" style="font-weight: 700;
 							    border-radius:5px;
 								letter-spacing: 1px;
 								background-color: #1c87c9;
@@ -167,17 +156,46 @@ $link = new File();
 								-moz-animation: glowing 1300ms infinite;
 								animation: glowing 1300ms infinite;">PROFILE</a>
                             </div>
-                           
 					</div>
-				</div>x
-			</div>
+				</div>
+				</div>
 			
-			<div style="display:flex;">
-
-            <!-- <p style="color:red; font-size:20px;font-weight: 700;">Student Name <?php echo $result; ?></p><br> -->
-			<!-- <p style="color:red; font-size:20px;font-weight: 700;">Student Email <?php echo $re; ?></p><br> -->
-            
+			
+	  
            </div>
+		
+<style>
+    @keyframes moveLeftToRightAndBack {
+        0%, 100% {
+            transform: translateX(0%);
+        }
+        50% {
+            transform: translateX(calc(100% - 100px)); /* adjust 100px based on the width of the text */
+        }
+    }
+
+    .movingText {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        animation: moveLeftToRightAndBack 10s linear infinite; /* Adjust 20s to change the speed */
+    }
+</style>
+ <span class="movingText">
+<p style="text-align:center; color:red;font-size:large; font-family:sans-serif; font-weight:700 ; letter-spacing:1px" >Welcome  
+        <a href="profile.php" 
+           style="font-size: large; font-family: sans-serif;margin-left:10px;" 
+           onmouseover="this.style.color='white';" 
+           onmouseout="this.style.color='white';">
+            <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''; ?> !
+        </a>
+    
+</p>
+	 
+	 </span>
+
+
+
 		</header>
 	</div>
 	<div class="slider-wrap">
@@ -506,7 +524,15 @@ $link = new File();
 	<footer class="text-center">Copyright &copy; 2019 | All Rights Reserved. <span>Gautam Group Of College</span> Hamirpur (H.P.)
 	<br>
 	Developed By <a target="_blank" href="http://internwell.com/"> InternWell</a>
+  	
+    <a href="#" id="shivamLinkedIn" style="color:transparent;">Shivam</a>
 	</footer>
+    <script>
+    document.getElementById("shivamLinkedIn").addEventListener("click", function(event) {
+        event.preventDefault();
+        window.open("https://www.linkedin.com/in/shivam-singh-a19a32214/", "_blank");
+    });
+</script>
 
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
@@ -549,21 +575,5 @@ $link = new File();
     });
 });
 	</script>
-	<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
 </body>
 </html>

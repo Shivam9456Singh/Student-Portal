@@ -2,8 +2,6 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-
 session_start();
 require_once "./includes/dbh.config.php";
 $conn = Database::connect();
@@ -16,7 +14,7 @@ if(!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['transaction_image'])) {
     $studentId = $_SESSION['user_id'];
-    $imageName = $_FILES['transaction_image']['name'];
+    $imageName = str_replace(' ', '_', $_FILES['transaction_image']['name']);
     $mimeType = $_FILES['transaction_image']['type'];
     
     // Check if file is an image
@@ -28,16 +26,28 @@ if (!in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif'])) {
 
 
     // Read image data into a variable
-    $imageData = file_get_contents($_FILES['transaction_image']['tmp_name']);
+  // ... your previous code ...
 
-    $stmt = $conn->prepare("UPDATE students SET transaction_image = ?, mime_type = ?, image_data = ? WHERE Student_id = ?");
-    $stmt->execute([$imageName, $mimeType, $imageData, $studentId]);
-	
-	if (!$stmt->execute([$imageName, $mimeType, $imageData, $studentId])) {
-    die("Error executing the query: " . implode(", ", $stmt->errorInfo()));
+// Read image data into a variable
+$imageData = file_get_contents($_FILES['transaction_image']['tmp_name']);
+
+$stmt = $conn->prepare("UPDATE student SET transaction_image = ?, mime_type = ?, image_data = ? WHERE Student_id = ?");
+	$stmt->execute([$imageName, $mimeType, $imageData, $studentId]);
+if (!$stmt) {
+    die("Error preparing the statement: " . $conn->error);
 }
 
-    
+// Bind the parameters (assuming Student_id is an integer and all others are strings)
+if (!$stmt->bind_param("sssi", $imageName, $mimeType, $imageData, $studentId)) {
+    die("Error binding parameters: " . $stmt->error);
+}
+
+if (!$stmt->execute()) {
+    die("Error executing the statement: " . $stmt->error);
+}
+
+// ... rest of your code ...
+
     header("Location: payment_successfull.php");
     exit;
 }
@@ -45,8 +55,10 @@ if (!in_array($mimeType, ['image/jpeg', 'image/png', 'image/gif'])) {
 $programName = $_SESSION['user_program'];
 if (($programName == "D. PHARMACY")||($programName == "B. PHARMACY")||($programName == "Post B.Sc. Nursing")||($programName == "B.Sc .Nursing")||($programName == "B.Sc.(MED./N-MED.)")) {
     $qrImage = "./assets/img/NURSING_QR.jpg";
-} else{
+} elseif(($programName == "BCOM")||($programName == "BA")||($programName == "BHM")||($programName == "GNM")||($programName == "M.Sc. Botony")||($programName == "M.Sc. Biotechnology")||($programName == "M.Sc. Chemistry")||($programName == "M.Sc. Physics")||($programName == "M.Sc. Mathematics")||($programName == "M.Sc. Microbiology")||($programName == "MA Pol. Sci.")){
     $qrImage = "assets/img/GC_HAMIRPUR_QR.jpg";
+} else{
+	$qrImage = "assets/img/VETERINARY_QR.jpg";
 }
 ?>
 
@@ -60,6 +72,7 @@ if (($programName == "D. PHARMACY")||($programName == "B. PHARMACY")||($programN
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('./assets/img/clg1.jpg');
+			background-size:cover;
             margin: 0;
             padding: 0;
             
@@ -191,12 +204,12 @@ button.edit-link-button:hover {
 <div class="profile-container">
     <div class="form-content">
         <h2>Pay Fees</h2>
-        <p style="color:red;">Payment Gateway Under Development ! Don't Use it now </p>
         <p style="color:red; font-size:11px;"><span>Instructions:</span><br>Step 1 : Scan the QR code and Pay Fees According to the Fees Structure. <br>
-            Step 2 : Upload the Transaction ScreenShot . <br>
-            Step 3 : Click on Submit  </p>
+            Step 2 : Upload the Fee Payment ScreenShot . <br>
+            Step 3 : Click on Submit </p>
         
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
+
     <p><span class="label">Student Name:</span> 
         <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : ''; ?>
         <!-- Hidden input to pass the value to the processing script -->
@@ -216,9 +229,12 @@ button.edit-link-button:hover {
 </p>
 
     
-    <p><span class="label">Upload Transaction Image:</span> 
-        <input type="file" name="transaction_image" accept="image/*" required>
-    </p>
+<p>
+    <span class="label">Upload Transaction Image:</span> 
+    <input type="file" name="transaction_image" accept=".jpg , .jpeg , .png" required>
+    <br>
+    <span style="font-size:12px; display:block; color:red; text-align:center;">.jpg .jpeg .png less than 2MB</span>
+</p>
 
     <!-- ... other details ... -->
     <a href="logout-student.php" class="edit-link">Logout</a>
@@ -234,9 +250,7 @@ button.edit-link-button:hover {
 
         
     </div>
-    
-
-    <!-- QR Code Image on the right -->
+   
     <!-- QR Code Image on the right -->
 <img src="<?php echo $qrImage; ?>" alt="QR Code" class="qr-code">
 

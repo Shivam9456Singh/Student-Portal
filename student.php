@@ -1,294 +1,388 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include 'includes/class.file.php';
+$fileget = new File();
+
+require_once "./includes/dbh.config.php"; // Your database connection file
+$conn = Database::connect();
+
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+if (!isset($_SESSION['admin_data'])) {
+    die("Session data not found.");
+}
+
+if (isset($_GET['q'])) {
+    die("Query parameter 'q' detected. Redirecting...");
+}
+
+if (isset($_GET['name'])) {
+    $name = $_GET['name'];
+
+    $sql = "SELECT transaction_image, mime_type FROM student WHERE name = ?";
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
+        die("Error preparing the statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        
+        if (empty($row['transaction_image'])) {
+            die("Image data is empty for the given name.");
+        }
+
+        // For testing, set MIME type explicitly
+        header("Content-type: image/jpeg");
+        // header("Content-type: " . $row['mime_type']); // Original line to use MIME type from DB
+
+        echo $row['transaction_image'];
+    } else {
+        die("No data found for the name: " . $name);
+    }
+    exit;
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>Faculty - Gautam Group Of Colleges</title>
+    <title>Students Records - Gautam Group Of Colleges</title>
 
-	<meta charset="utf-8">
-	<meta content='#343a40' name='theme-color'/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<!-- viewport -->
-	<!-- <meta name="viewport" content="width=device-width,initial-scale=1"> -->
-	<meta name="viewport" content="width=1024px">
-	<link rel="shortcut icon" type="image/png" href="assets/img/favicon.png"/>
-	<!-- css -->
-	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.2.0/css/swiper.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/animation.css">
-	<link rel="canonical" href="faculty.html">
-	<link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
-	<!-- fontawesome -->
-	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-</head>
-<body>
-	<div class="head-wrap">
-		<header>
-			<div class="container">
-				<div class="row">
-					<div class="col-8">
-						<div class="d-flex justify-content-center">
-							<div class="img-logo">
-								<a href="index.php"><img src="assets/img/logo1.png" alt="GGC Logo"></a>
-							</div>
-							<div class="info">
-								<span>Gautam Group Of Colleges</span>
-								<p>Hamirpur (H.P.)</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-4">
-						<form name="search" method="GET" action="search.html">	
-							<div class="search-box">
-						      	<div class="input-group">
-								    <input type="text" class="form-control" name="search" placeholder="Search" required="">
-								    <div class="input-group-append">
-								      <button class="btn btn-secondary" type="submit">
-								        <i class="fa fa-search"></i>
-								      </button>
-								    </div>
-							  	</div>
-					   		</div>
-					   	</form>
-					</div>
-				</div>
-			</div>
-		</header>
-	</div>
-	<div class="slider-wrap">
-		<div class="row">
-			<div class="col-9">
-					<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-					  <ol class="carousel-indicators">
-					    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-					    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-					    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-					    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-					  </ol>
-					  <div class="carousel-inner">
-					    <div class="carousel-item mh-250 active">
-					      <img class="d-block w-100 h-220" src="assets/img/clgweb.webp" alt="First slide">
-					    </div>
-					    <div class="carousel-item">
-					      <img class="d-block w-100 h-220" src="assets/img/clgloc.webp" alt="Second slide">
-					    </div>
-					    <div class="carousel-item">
-					      <img class="d-block w-100 h-220" src="assets/img/fest2.webp" alt="Third slide">
-					    </div>
-					    <div class="carousel-item">
-					      <img class="d-block w-100 h-220" src="assets/img/clgview.webp" alt="Third slide">
-					    </div>
-					    <div class="carousel-item">
-					      <img class="d-block w-100 h-220" src="assets/img/winpic.webp" alt="Third slide">
-					    </div>
-					  </div>
-					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					    <span class="sr-only">Previous</span>
-					  </a>
-					  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-					    <span class="sr-only">Next</span>
-					  </a>
-					</div>
-			</div>
-			<div class="col-3">
-				<div class="row">
-					<div class="col-6">
-						<div class="img-wrapper">
-                          <img src="assets/img/hvpi2.webp" alt="Meritorious Students Receiving Gold Medals From Sh. Mohammad Hamid Ansari, Hon'ble Vice President of India" title="Meritorious Students Receiving Gold Medals From Sh. Mohammad Hamid Ansari, Hon'ble Vice President of India">
-                        </div>
-                        <div class="img-wrapper">
-                          <img src="assets/img/principal.webp" alt="Dr. Rajneesh Gautam Principal Cum Secretary" title="Dr. Rajneesh Gautam Principal Cum Secretary">
-                        </div>
-					</div>
-					<div class="col-6">
-                        <div class="img-wrapper">
-                          <img src="assets/img/hvpi1.webp" alt="Meritorious Students Receiving Gold Medals From Sh. Mohammad Hamid Ansari, Hon'ble Vice President of India" title="Meritorious Students Receiving Gold Medals From Sh. Mohammad Hamid Ansari, Hon'ble Vice President of India">
-                        </div>
-						<div class="img-wrapper">
-							<img src="assets/img/founder.webp" alt="Shri Jai Ram Thakur, Hon'ble Chief Minister Himachal Pradesh" title="Sh. Jagdish Gautam,Founder of GGC">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-  	<main>
-		<div class="row">
-			<div class="col-3">
-				<div class="sidenav-wrap">
-					<nav>
-						<ul id="main-nav" class="list-unstyled main-ul">
-							<li><a href="index.php">Home</a></li>
-							<li><a href="about-us.html">About Us</a></li>
-							<li><a href="vision-mission.html">Vision & Mission</a></li>
-							<li><a href="founder-message.html">Founder Message</a></li>
-							<li><a href="principal-message.html">Principal Message</a></li>
-							<li><a href="academic.html">Academic</a>
-								<ul id="submenu" class="list-unstyled">
-									<li><a href="ug.html">UG</a>
-										<ul id="submenu-inner" class="list-unstyled">
-											 <li><a href="bsc.html">B.Sc.(MED./N-MED.)</a></li>
-						              <li><a href="bcom.html">BCOM</a></li>
-						              <li><a href="ba.html">BA</a></li>
-									  <li><a href="bba.html">BBA</a></li>
-						              <li><a href="bhm.html">BHM</a></li>
-						              <li><a href="gnm.html">GNM</a></li>
-						              <li><a href="bsc-nursing.html">B.Sc .Nursing</a></li>
-						              <li><a href="#">Post B.Sc. Nursing</a></li>
-										</ul>
-									</li>
-									<li><a href="pg.html">PG</a>
-										<ul id="submenu-inner" class="list-unstyled">
-											<li><a href="msc-botany.html">M.Sc. Botony</a></li>
-						              <li><a href="msc-biotech.html">M.Sc. Biotechnology</a></li>
-						              <li><a href="msc-chemistry.html">M.Sc. Chemistry</a></li>
-						              <li><a href="msc-physics.html">M.Sc. Physics</a></li>
-						              <li><a href="msc-mathematics.html">M.Sc. Mathematics</a></li>
-						              <li><a href="msc-microbio.html">M.Sc. Microbiology</a></li>
-						              <li><a href="mapolsci.html">MA Pol. Sci.</a></li>
-										</ul>
-									</li>
-									<li><a href="professional.html">PROFESSIONAL</a>
-							            <ul id="submenu-inner" class="list-unstyled">
-							              <li><a href="bba.html">BBA</a></li>
-							              <li><a href="bca.html">BCA</a></li>
-							              <li><a href="mba.html">MBA</a></li>
-							              <li><a href="pgdca.html">PGDCA</a></li>
-							            </ul>
-						          </li>
-						           <li><a href="pharmacy.html">PARMACY</a>
-							            <ul id="submenu-inner" class="list-unstyled">
-							              <li><a href="bpharmacy.html">B. PARMACY</a></li>
-							              <li><a href="dpharmacy.html">D. PARMACY</a></li>
-							            </ul>
-						          </li>
-								</ul>
-							</li>
-							<li><a href="cells.html">Cells</a>
-								<ul id="submenu" class="list-unstyled" style="width: 280px;">
-									<li><a href="anti-ragging-cell.html">Anti Ragging Cell</a></li>
-					          <li><a href="student-grievance-redressal-cell.html">Student Grievance Redressal Cell</a></li>
-					          <li><a href="sc-st-grievance-redressal.html">SC/ST Grievance Redressal</a></li>
-					          <li><a href="sexual-harassment.html">Sexual Harassment</a></li>
-					          <li><a href="caste-discri.html">Caste Discrimination Committee</a></li>
-					          <li><a target="_blank" href="http://mooc.org/">MOOC</a></li>
-					          <li><a href="university-industrial-cell.html">University Industry Cell</a></li>
-								</ul>
-							</li>
-
-							<li><a href="student-zone.html">Student Zone</a>
-								<ul id="submenu" class="list-unstyled">
-									<li><a href="feedback.html">Feedback</a></li>
-								</ul>
-							</li>
-							<li><a href="gallery.php">Gallery</a></li>
-							<li><a href="fee-structure.html">Fee Structure</a></li>
-							<li><a href="notification.php">Notifications</a></li>
-							<li><a href="faculty.html">Faculty</a></li>
-							<li><a href="contact-us.html">Contact Us</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<div class="col-9">
-						<div class="container">
-			<div class="about-title text-center">
-				<h4>FACULTY</h4>
-				<hr/>
-			</div>
-							<div class="dept-details text-center">
-				<h5 class="dept-pd text-uppercase">Department of MBA </h5>
-				<div class="table-responsive">
-					<table class="table table-striped">
-					  <thead class="thead-dark">
-					    <tr>
-					      <th scope="col">Sr. No.</th>
-					      <th scope="col">Name</th>
-							 <th scope="col">Designation</th>
-					      <th scope="col">Qualification</th>
-					      <th scope="col">Contacts</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-						   <tr>
-					      <th scope="row">1</th>
-					      <td>Mr.Jitender singh</td>
-						 <td> Assistant Professor </td>
-					      <td>BBA,MBA,Net</td>
-					      <td>8580754924</td>x
-					    </tr>
-						   
-
-<!-- footer -->
-<section class="footer-link">
-	<div class="container">
-		<div class="row">
-			<div class="col-3">
-				<div class="ins-detail text-center">
-					<img src="assets/img/logo1.png" style="height: 60px; width: 60px;">
-					<br/>
-					<a href="">Gautam Group Of Colleges</a>
-					<p>Near Bus Stand Hamirpur</p>
-					<p>HP 177001</p>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="links">
-					<span>General Information</span>
-					<hr class="full" />
-					<ul class="list-unstyled">
-						<li><i class="fa fa-angle-right"></i> <a href="about-us.html"> About Us</a></li>
-						<li><i class="fa fa-angle-right"></i> <a href="contact-us.html"> Contact Us</a></li>
-						<li><i class="fa fa-angle-right"></i> <a href="anti-ragging-cell.html"> Anti-Ragging</a></li>
-						<li><i class="fa fa-angle-right"></i> <a href="faculty.html">Faculty</a></li>
-						<li><i class="fa fa-angle-right"></i> <a href="feedback.html"> Feedback</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="links">
-					<span>Quick links</span>
-					<hr class="full" />
-					<ul class="list-unstyled">
-						<li><i class="fa fa-angle-right"></i> <a href="vision-mission.html">Vision & Mission</a></li>
-
-						<li><i class="fa fa-angle-right"></i> <a href="notification.php">Notifications</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-3">
-				<div class="links">
-					<span>Social Contact</span>
-					<hr class="full" />
-					<section class="social-contact">
-				            <ul class="list-inline list-social text-center">
-				                <li class="social-facebook">
-				                    <a target="_blank" href="https://m.facebook.com/pages/category/School/Gautam-Group-Of-Colleges-1397929340472669/"><i class="fab fa-facebook-f"></i></a>
-				                </li>
-				                <li class="social-insta">
-				                    <a target="_blank" href="https://instagram.com/ggc_hamirpur?igshid=1pww3htnuhwj1"><i class="fab fa-instagram"></i></a>
-				                </li>
-				            	<li class="social-twitter">
-				                    <a target="_blank" href="https://twitter.com/ggchmr?s=08"><i class="fab fa-twitter"></i></a>
-				                </li>
-				            </ul>
-				    </section>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-	<a href="#top"><button id="scrollTop" class="animatable"><i class="fas fa-angle-up"></i></button></a>
-	<footer class="text-center">Copyright &copy; 2019 | All Rights Reserved. <span>Gautam Group Of College</span> Hamirpur (H.P.)
-		<br>
-	Developed By <a target="_blank" href="http://internwell.com/"> InternWell</a>
-	</footer>
-
+    <meta charset="utf-8">
+    <meta content='#343a40' name='theme-color' />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="assets/img/favicon.png" />
+    <!-- css -->
 	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.js"></script>
-	<script src="assets/js/main.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script>(function () {
+
+                const idleDurationSecs = 600;
+                const redirectUrl = 'adminhome-view-delete-links.php?q=logout';
+                let idleTimeout;
+
+                const resetIdleTimeout = function () {
+
+                    if (idleTimeout) clearTimeout(idleTimeout);
+                    idleTimeout = setTimeout(() => location.href = redirectUrl, idleDurationSecs * 1000);
+                };
+                resetIdleTimeout();
+                ['click', 'touchstart', 'mousemove'].forEach(evt =>
+                    document.addEventListener(evt, resetIdleTimeout, false)
+                );
+            })();
+    </script>
+    <style>
+        html {
+            max-width: 1800px;
+            min-width: 400px;
+            width: 97%;
+        }
+
+        .border-r-20 {
+            border-radius: 20px 20px 0 0;
+        }
+
+        table tr:hover {
+            cursor: pointer;
+        }
+
+        .modal .modal-dialog {
+            max-width: 800px;
+        }
+
+        .modal .modal-content p {
+            font-size: 16px;
+        }
+
+        @media (max-width: 468px) {
+            html {
+                width: 95%;
+            }
+
+            .img-logo img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .d-flex {
+                align-items: center;
+            }
+
+            .img-logo,
+            .info {
+                padding: 5px;
+            }
+
+            .info {
+                margin: 5px 0;
+                text-align: center;
+            }
+
+            .info span {
+                font-size: 1rem;
+            }
+
+            .info p {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 2px 0;
+            }
+			.transaction-link:hover, .transaction-link:active {
+    color: blue !important;
+}
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-brand">
+                    <span>Admin Dashboard</span>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="sidebar-header">
+                    <div class="user-info text-center">
+                        <span class="user-name">
+                            <strong>
+                                <?php echo $_SESSION['admin_data']['name']; ?>
+                            </strong>
+                        </span>
+                        <span class="user-role">
+                            <?php echo $_SESSION['admin_data']['email']; ?>
+                        </span>
+                        <span class="user-role">Administrator</span>
+                        <div class="">
+                            <a href="adminhome-view-delete-links.php?q=logout"><i class="fa fa-power-off"></i>
+                                Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+						 <div class="sidebar-menu">
+                        <li class="header-menu">
+                            <a href="adminhome.php"><span style="color:#ffc107;">Go To Dashboard</span></a>
+							<a href="student.php"><span>Students Record</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+        <main class="page-content">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <header>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="d-flex justify-content-center">
+                                    <div class="img-logo">
+                                        <a href="#"><img src="assets/img/logo1.png" alt="GGC Logo"></a>
+                                    </div>
+                                    <div class="info">
+                                        <span>Gautam Group Of College</span>
+                                        <p>Hamirpur (H.P.)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="msg-wrapper border-r-20">
+                        <div class="">
+                            <div id="latest" class="msg-box text-center">
+                                <div class="px-4 py-2 text-justify head-title">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h4>Online Students Records</h4>
+                                            <div class="hr"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                           <!-- <form action="includes/export.php" method="post" name="export">
+                                                <input type="hidden" name="hidden">
+                                                <button type="submit" class="btn btn-primary mb-2" name="export">Export
+                                                    All Records</button> 
+                                            </form> -->
+                                        </div>
+                                    </div>
+                                    <div class="container">
+                                        <?php 
+								if(isset($_SESSION['msg-4'])) {
+									echo $_SESSION['msg-4'];
+									unset($_SESSION['msg-4']);
+								}
+							?>
+										<div class="container my-3">
+    <form action="" method="POST">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search by Name, Guardian's Name, Phone, or Email" name="searchQuery">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" name="searchBtn">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead class="thead-dark">
+                                                        <tr>
+                                                            <th scope="col">Sr. No.</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Guardian's Name</th>
+                                                            <th scope="col">Email id</th>
+                                                            <th scope="col">Course</th>
+                                                            <th scope="col">Contact No</th>
+                                                            <th scope="col">Address</th>
+															<th scope="col">Fees</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                        <?php 
+	$searchQuery = "";
+$whereClause = " WHERE email_verified = 1";
+
+if (isset($_POST['searchBtn']) && !empty($_POST['searchQuery'])) {
+    $searchQuery = trim($_POST['searchQuery']);
+    $searchQuery = "%$searchQuery%";
+    $whereClause .= " AND (name LIKE ? OR Guardians_name LIKE ? OR mobile LIKE ? OR email LIKE ?)";
+}
+
+														
+										
+                                            $sql = "SELECT * FROM student" . $whereClause;
+$stmt = $conn->prepare($sql);
+
+if ($searchQuery !== "") {
+    $stmt->bind_param("ssss", $searchQuery, $searchQuery, $searchQuery, $searchQuery);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+														
+                                            $count =1;
+                                            if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) {
+                                                   echo "<tr>";
+                                                    echo "<th scope='row'>" .$count++. "</th>"; // Assuming 'id' is the column for Sr. No.
+                                                    echo "<td>" . $row["name"] . "</td>";
+                                                    echo "<td>" . $row["Guardians_name"] . "</td>";
+                                                    echo "<td>" . $row["email"] . "</td>";
+                                                    echo "<td>" . $row["program"] . "</td>";
+                                                    echo "<td>" . $row["mobile"] . "</td>";
+                                                    echo "<td>" . $row["address"] . "</td>";
+													echo "<td>";
+if (!empty($row["transaction_image"])) {
+    echo "<a href='javascript:void(0);' data-url='get_image.php?name=" . urlencode($row["name"]) . "' class='view-transaction transaction-link' style='color: black;'>View Reciept</a>";
+} else {
+    echo "Not Paid";
+}
+
+
+echo "</td>";
+
+                                                    echo "</tr>";
+                                                    
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='5'>No records found</td></tr>";
+                                            }
+                                            $conn->close();
+                                         ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="text-center">Copyright &copy; 2019 | All Rights Reserved. <span>Gautam Group Of
+                            College</span> Hamirpur (H.P.)
+                    </footer>
+                </div>
+            </div>
+        </main>
+        <!-- page-content" -->
+    </div>
+    <!-- page-wrapper -->
+    <script type="text/javascript">
+        $("#close-sidebar").click(function () {
+            $(".page-wrapper").removeClass("toggled");
+        });
+        $("#show-sidebar").click(function () {
+            $(".page-wrapper").addClass("toggled");
+        });
+    </script>
+	<div class="modal fade" id="transactionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Transaction Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="" id="transactionImage" alt="Transaction Image" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+</div>
+	<script>
+$(document).on('click', '.view-transaction', function(e) {
+    e.preventDefault(); 
+    let imageUrl = $(this).data('url');  
+    $('#transactionImage').attr('src', imageUrl)
+                          .on('error', function() {
+                              alert('Failed to load image. Please try again.');
+                          }); 
+    $('#transactionModal').modal('show'); 
+});
+	</script>
+
+
 </body>
+
 </html>
