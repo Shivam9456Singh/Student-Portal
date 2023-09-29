@@ -1,0 +1,90 @@
+/* Apply the background image and center the content */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.col-lg-8 {
+  max-width: 800px; /* Adjust the maximum width of the form */
+  margin-top: 30px;
+  padding: 30px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Add a semi-transparent white background */
+  border-radius: 10px;
+}
+
+.form-group label {
+  color: rgb(0, 0, 0);
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 5px;
+  color: #333;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+}
+
+.form-group input[type="text"]:hover,
+.form-group input[type="email"]:hover,
+.form-group input[type="password"]:hover {
+  background: #fffafa;
+}
+
+.form-group .btn {
+  background-color: green;
+  border: 1px solid green;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  width: 100%;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.form-group .btn.btn-default {
+  background-color: transparent;
+  border-color: transparent;
+  color: #333;
+  font-weight: 500;
+  margin-left: 10px;
+}

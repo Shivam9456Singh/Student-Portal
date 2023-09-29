@@ -1,0 +1,7 @@
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW SSL_REDIRECT:startuptantra.com
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^startuptantra.com$
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:startuptantra.com
