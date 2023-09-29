@@ -1,5 +1,5 @@
 # Student Profile Portal for college Webbsite.
-![College Website ](https://ggchmr.com/)
+[College Website ](https://ggchmr.com/)
 
 # Sign-In, New-Registration portal for College students.
 
