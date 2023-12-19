@@ -26,47 +26,61 @@ Web Hosting: plesk Obsidian 18.0.53
 
 # Key Features:
 
- 1. User Authentication:
+1. User Authentication:
+    
 --> Secure signup/login processes for students.
+    
 --> Email verification via SMTP protocol to ensure validated user access.
 
- 2. Student Portal:
+2. Student Portal:
+    
 --> Allows students to create and manage their profiles.
+    
 --> Functionalities include editing personal details, online fee payment, and uploading screenshots of payments.
 
- 3. Admin Interface:
+3. Admin Interface:
+    
 --> Enables college administrators to oversee student profiles.
+    
 --> Features include viewing, editing, and deleting student details, along with fee payment tracking.
 
- 4. Scalability and Performance:
+4. Scalability and Performance:
+
 --> Optimized for high-traffic, handling over 100 requests per minute.
+    
 --> Demonstrates efficient load handling and smooth user experience.
 
- 5.Security and Data Management:
+5.Security and Data Management:
+
 --> Ensures data integrity and security throughout the application.
+
 --> Implements best practices in data handling and user privacy.
 
- 6. Project Impact:
+6. Project Impact:
+   
 --> This system streamlines the management of student profiles and fee payments, significantly improving administrative efficiency. It offers a seamless and secure platform for students to manage their academic profiles, enhancing their overall experience.
 
- 7. Future Scope:
+8. Future Scope:
+    
 --> Integration of additional features like academic tracking, result publication, and personalized student dashboards.
 --> Further optimization for mobile responsiveness and cross-platform compatibility.
 
- 8. Live Deployment:
-The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. # With capacity of handling about 100 requests per second.
+10. Live Deployment:
+    
+--> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. # With capacity of handling about 100 requests per second.
 
 
 ![Screenshot (23)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/f39e448c-0705-4d70-a52a-389ef7953da9)
+
 ![Screenshot (24)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/3962f1f0-4eff-4b82-849e-5b15786c69cd)
+
 ![Screenshot (25)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/344751a0-e01b-4669-a3fb-c45ad32cedc5)
 
 # with OTP Email Verification .
+
 ![Screenshot (26)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/0d6f76c4-1c27-4686-b80f-42b91044ef20)
 
 ![Screenshot (58)](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/041c5fbe-93fa-4b02-a500-bbf11827c5af)
-
-
 
 
 # profile and payment portal
