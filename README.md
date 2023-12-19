@@ -3,11 +3,11 @@ College Student Profile Management System
 [College Website ](https://ggchmr.com/)
 
 ------------------------------------------------
-Project Overview:<br>
+Project Overview:<br><br>
 As a Freelancing Development project with Industry Level standards followed.
 This project involves the development of a comprehensive web-based system for managing student profiles within a college environment. The system is designed to be highly responsive and user-friendly, catering to both students and college administrators.
 <br><br>
-Technical Stack:<br>
+Technical Stack:<br><br>
 Frontend: HTML5, Bootstrap, CSS, JavaScript<br>
 Backend: PHP<br>
 Communication Protocol: TCP/IP for request handling<br>
@@ -21,30 +21,30 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 --> Secure signup/login processes for students.<br>
 --> Email verification via SMTP protocol to ensure validated user access.
 <br><br>
-2. Student Portal:<br><br>
+2. Student Portal:<br>
 --> Allows students to create and manage their profiles.<br>
 --> Functionalities include editing personal details, online fee payment, and uploading screenshots of payments.<br><br>
 
-3. Admin Interface:<br><br>
+3. Admin Interface:<br>
 --> Enables college administrators to oversee student profiles.<br>
 --> Features include viewing, editing, and deleting student details, along with fee payment tracking.
 <br><br>
-4. Scalability and Performance:<br><br>
+4. Scalability and Performance:<br>
 --> Optimized for high-traffic, handling over 100 requests per minute.<br>
 --> Demonstrates efficient load handling and smooth user experience.<br><br>
 
-5. Security and Data Management:<br><br>
+5. Security and Data Management:<br>
 --> Ensures data integrity and security throughout the application.<br>
 --> Implements best practices in data handling and user privacy.<br><br>
 
-6. Project Impact:<br><br>
+6. Project Impact:<br>
 --> This system streamlines the management of student profiles and fee payments, significantly improving administrative efficiency. It offers a seamless and secure platform for students to manage their academic profiles, enhancing their overall experience.<br><br>
 
-8. Future Scope:<br><br>
+8. Future Scope:<br>
 --> Integration of additional features like academic tracking, result publication, and personalized student dashboards.<br>
 --> Further optimization for mobile responsiveness and cross-platform compatibility.<br><br>
 
-10. Live Deployment:<br><br>
+10. Live Deployment:<br>
 --> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. With capacity of handling about 100 requests per second.
 
 
