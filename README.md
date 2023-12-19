@@ -10,9 +10,18 @@ This project involves the development of a comprehensive web-based system for ma
 Technical Stack:
 
 Frontend: HTML5, Bootstrap, CSS, JavaScript
+
 Backend: PHP
+
 Communication Protocol: TCP/IP for request handling
+
 Email Verification: SMTP Protocol
+
+Database: MySQL, PHPMyAdmin.
+
+Server: Apache , XAMMP
+
+Web Hosting: plesk Obsidian 18.0.53
 
 # Key Features:
 
