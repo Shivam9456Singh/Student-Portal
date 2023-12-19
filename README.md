@@ -21,7 +21,7 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 --> Secure signup/login processes for students.<br>
 --> Email verification via SMTP protocol to ensure validated user access.
 <br><br>
-2. Student Portal:<br>
+2. Student Portal:<br><br>
 --> Allows students to create and manage their profiles.<br>
 --> Functionalities include editing personal details, online fee payment, and uploading screenshots of payments.<br><br>
 
@@ -29,7 +29,7 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 --> Enables college administrators to oversee student profiles.<br>
 --> Features include viewing, editing, and deleting student details, along with fee payment tracking.
 <br><br>
-4. Scalability and Performance:<br>
+4. Scalability and Performance:<br><br>
 --> Optimized for high-traffic, handling over 100 requests per minute.<br>
 --> Demonstrates efficient load handling and smooth user experience.<br><br>
 
@@ -45,7 +45,7 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 --> Further optimization for mobile responsiveness and cross-platform compatibility.<br><br>
 
 10. Live Deployment:<br><br>
---> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. # With capacity of handling about 100 requests per second.
+--> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. With capacity of handling about 100 requests per second.
 
 
 ![Screenshot (23)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/f39e448c-0705-4d70-a52a-389ef7953da9)
