@@ -5,6 +5,7 @@ College Student Profile Management System
 ------------------------------------------------
 Project Overview:
 
+As a Freelancing Development project with Industry Level standards followed.
 This project involves the development of a comprehensive web-based system for managing student profiles within a college environment. The system is designed to be highly responsive and user-friendly, catering to both students and college administrators.
 
 Technical Stack:
@@ -62,11 +63,38 @@ The system is currently deployed and actively used, showcasing real-world applic
 
 # with OTP Email Verification .
 ![Screenshot (26)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/0d6f76c4-1c27-4686-b80f-42b91044ef20)
-![Screenshot (27)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/d18f69f8-6849-452c-8714-6b80535ee2ef)
+
+![Screenshot (58)](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/041c5fbe-93fa-4b02-a500-bbf11827c5af)
+
+
 
 
 # profile and payment portal
+
 ![Screenshot (28)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/917b7bab-3722-4e74-a228-11c332a2b0a1)
 
+![Screenshot (55)](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/38863863-031e-406b-b05c-af00d135e901)
+
+
+# Fees Payment portal
+
 ![Screenshot (31)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/f6ff940c-c8a5-46ee-83f4-cfe9f7f8a218)
+
+# Fees Payment Successfull
+
+![Screenshot (54)](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/ce4bc986-782b-4bfc-ad20-d0bf5e3b0547)
+
+# Admin View / Student Record and Payment Status Admin Side
+
+![Screenshot 2023-12-19 110200](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/bdcc61f7-8e87-4829-82b6-0da0076a39ea)
+
+![Screenshot 2023-12-19 110213](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/eef01eb1-d578-4905-90cf-e92ad4cb293a)
+
+
+
+
+
+
+
+
 
