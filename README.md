@@ -1,16 +1,16 @@
-# Student Profile Portal for college Webbsite.
-# [College Website ](https://ggchmr.com/)
+College Student Profile Management System
+[College Website ](https://ggchmr.com/)
 
 College Student Profile Management System
 Project Overview:
 This project involves the development of a comprehensive web-based system for managing student profiles within a college environment. The system is designed to be highly responsive and user-friendly, catering to both students and college administrators.
---------------------------------------------------------------------------------------------------------------------
+
 Technical Stack:
 Frontend: HTML5, Bootstrap, CSS, JavaScript
 Backend: PHP
 Communication Protocol: TCP/IP for request handling
 Email Verification: SMTP Protocol
----------------------------------------------------------------------------------------------------------------------
+
 # Key Features:
 
  1. User Authentication:
