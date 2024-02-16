@@ -1,7 +1,5 @@
 College Student Profile Management System
 
-[College Website ](https://ggchmr.com/)
-
 ------------------------------------------------
 Project Overview:<br><br>
 As a Freelancing Development project with Industry Level standards followed.
