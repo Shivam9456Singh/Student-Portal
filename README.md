@@ -43,7 +43,7 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 --> Further optimization for mobile responsiveness and cross-platform compatibility.<br><br>
 
 10. Live Deployment:<br>
---> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. With capacity of handling about 100 requests per second.
+--> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. With capacity of handling about 100 requests at a time.
 
 
 ![Screenshot (23)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/f39e448c-0705-4d70-a52a-389ef7953da9)
