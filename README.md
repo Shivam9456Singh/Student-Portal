@@ -46,7 +46,7 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 --> The system is currently deployed and actively used, showcasing real-world applicability and robust performance under high usage conditions. With capacity of handling about 100 requests at a time.
 
 #Project Demo<br>
-![Link to post](https://www.linkedin.com/posts/shivam-s0901_connections-freelance-html5-activity-7143136055095975936-m6Zz?utm_source=share&utm_medium=member_desktop)
+[Link to post](https://www.linkedin.com/posts/shivam-s0901_connections-freelance-html5-activity-7143136055095975936-m6Zz?utm_source=share&utm_medium=member_desktop)<br>
 ![Screenshot (23)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/f39e448c-0705-4d70-a52a-389ef7953da9)
 
 ![Screenshot (24)](https://github.com/Shivam9456Singh/Student-Registration-for-college-Website/assets/113454708/3962f1f0-4eff-4b82-849e-5b15786c69cd)
