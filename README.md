@@ -79,7 +79,6 @@ Web Hosting: plesk Obsidian 18.0.53<br>
 
 ![Screenshot 2023-12-19 110200](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/bdcc61f7-8e87-4829-82b6-0da0076a39ea)
 
-![Screenshot 2023-12-19 110213](https://github.com/Shivam9456Singh/Student-Portal/assets/113454708/eef01eb1-d578-4905-90cf-e92ad4cb293a)
 
 
 
